@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="mobile-about.css">
     <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="desktop-fixes.css">
-    <link rel="stylesheet" href="mobile-fixes.css">
+    <link rel="stylesheet" href="simple-mobile.css">
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -143,36 +143,8 @@
         </div>
     </div>
 
-    <!-- Device detection and mobile script loading -->
-    <script>
-        // Detect if mobile device
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-        // Mobile script paths
-        const mobileScripts = ['mobile-video.js', 'mobile-entry.js'];
-        
-        // Load mobile scripts in order if on mobile device
-        if (isMobile) {
-            console.log('Mobile device detected, loading mobile-specific scripts');
-            // Load scripts in sequence for proper initialization
-            let scriptIndex = 0;
-            
-            function loadNextScript() {
-                if (scriptIndex < mobileScripts.length) {
-                    const script = document.createElement('script');
-                    script.src = mobileScripts[scriptIndex];
-                    script.onload = function() {
-                        scriptIndex++;
-                        loadNextScript();
-                    };
-                    document.body.appendChild(script);
-                }
-            }
-            
-            // Start loading scripts
-            loadNextScript();
-        }
-    </script>
+    <!-- Simple mobile handler (no dependencies) -->
+    <script src="simple-mobile.js"></script>
     
     <!-- Common scripts for both desktop and mobile -->
     <script src="script.js"></script>
