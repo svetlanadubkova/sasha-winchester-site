@@ -1,5 +1,5 @@
 // Direct mobile approach
-// This script will bypass the intro sequence entirely on mobile and directly show the main content
+// This script will bypass the intro sequence only on mobile and directly show the main content
 
 // Execute immediately when script loads
 (function() {
@@ -11,6 +11,9 @@
     
     // Initialize mobile-specific logic
     initMobile();
+  } else {
+    console.log('Desktop device detected, using normal sequence');
+    // Do nothing on desktop - let the normal desktop process handle it
   }
   
   function initMobile() {
@@ -68,25 +71,5 @@
         console.log('Mobile video play failed:', error);
       });
     }
-    
-    // Set a fallback timer to double check everything is visible
-    setTimeout(function() {
-      console.log('Fallback check: ensuring content is visible');
-      
-      if (loadingScreen) {
-        loadingScreen.style.display = 'none';
-      }
-      
-      if (mainContent) {
-        mainContent.style.display = 'block';
-        mainContent.style.opacity = '1';
-      }
-      
-      if (worksSection) {
-        worksSection.classList.add('active');
-        worksSection.style.display = 'flex';
-        worksSection.style.opacity = '1';
-      }
-    }, 500);
   }
 })();
