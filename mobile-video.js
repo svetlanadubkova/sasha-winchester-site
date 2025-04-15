@@ -1,6 +1,5 @@
 // Enhanced Mobile Video Handler
 document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('bgVideo');
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     if (isMobile) {
@@ -30,29 +29,17 @@ function setupMobileVideo() {
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 console.log('Video playback started successfully');
+                // Signal video is ready for title sequence to begin
+                document.dispatchEvent(new CustomEvent('videoReady'));
             }).catch(error => {
                 console.warn('Autoplay was prevented, using silent mode:', error);
                 
-                // If autoplay fails, just hide the video container
-                const videoContainer = document.querySelector('.video-container');
-                if (videoContainer) {
-                    videoContainer.style.opacity = '0.5';
-                }
-                
-                // Just proceed with the site anyway
-                setTimeout(() => {
-                    proceedWithoutVideo();
-                }, 500);
+                // Signal video failed but we should proceed anyway
+                document.dispatchEvent(new CustomEvent('videoFailed'));
             });
-        }
-    }
-    
-    // Function to proceed without the video if autoplay fails
-    function proceedWithoutVideo() {
-        const loadingScreen = document.querySelector('.loading-screen');
-        if (loadingScreen) {
-            // Make sure the loading screen is visible
-            loadingScreen.style.opacity = '1';
+        } else {
+            // No promise returned (old browser), assume it's playing and signal ready
+            document.dispatchEvent(new CustomEvent('videoReady'));
         }
     }
     
@@ -61,6 +48,15 @@ function setupMobileVideo() {
     
     // Add touch listener to entire document to trigger video play
     document.addEventListener('touchstart', function() {
-        video.play().catch(e => console.log('Play on touch failed:', e));
+        video.play().catch(e => {
+            console.log('Play on touch failed:', e);
+            // Signal we should proceed even though video might not be playing
+            document.dispatchEvent(new CustomEvent('videoFailed'));
+        });
     }, { once: true });
+    
+    // Safety timeout - if no events fire within 3 seconds, force proceed
+    setTimeout(() => {
+        document.dispatchEvent(new CustomEvent('mobileSafetyTimeout'));
+    }, 3000);
 }
