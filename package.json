@@ -1,0 +1,11 @@
+{
+  "name": "sasha-winchester-site",
+  "version": "1.0.0",
+  "description": "Sasha Winchester - Svetlana Dubkova Artist Portfolio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Svetlana Dubkova",
+  "license": "MIT"
+}

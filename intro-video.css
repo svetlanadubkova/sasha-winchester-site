@@ -1,0 +1,249 @@
+/* Intro Video Screen Styles - Modern Edition */
+:root {
+    --deep-red: #8b0000;
+    --soft-red: #c53030;
+    --rich-red: #710000;
+    --pastel-peach: #ffd8c4;
+    --soft-pink: #ffb6c1;
+    --white: #ffffff;
+    --serif-font: 'Playfair Display', serif;
+    --transition-duration: 2.2s;
+}
+
+/* Video Background - Takes up full screen from the start */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    overflow: hidden;
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(139, 0, 0, 0.4);
+    z-index: -9;
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    transition: opacity var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+/* Title container */
+.title-container {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    height: 200px;
+}
+
+/* Modern title style - Sasha Winchester (Whimsical) */
+.title-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 1.5s cubic-bezier(0.17, 0.67, 0.36, 0.93);
+    width: 100%;
+    text-align: center;
+}
+
+#title-text-1 h1 {
+    font-size: 9vw;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    opacity: 0.9;
+    white-space: nowrap;
+    text-transform: lowercase;
+    line-height: 1;
+    text-shadow: 
+        0 0 40px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(0, 0, 0, 0.3),
+        0 0 60px rgba(255, 255, 255, 0.2);
+    animation: glow 3s infinite alternate ease-in-out;
+}
+
+/* Magical animation for Sasha Winchester */
+@keyframes glow {
+    0% {
+        text-shadow: 
+            0 0 40px rgba(0, 0, 0, 0.6),
+            0 0 20px rgba(0, 0, 0, 0.3),
+            0 0 60px rgba(255, 255, 255, 0.2);
+        letter-spacing: 0.05em;
+    }
+    50% {
+        text-shadow: 
+            0 0 40px rgba(0, 0, 0, 0.6),
+            0 0 20px rgba(0, 0, 0, 0.3),
+            0 0 70px rgba(255, 255, 255, 0.3),
+            0 0 90px rgba(255, 255, 255, 0.1);
+        letter-spacing: 0.07em;
+    }
+    100% {
+        text-shadow: 
+            0 0 40px rgba(0, 0, 0, 0.6),
+            0 0 20px rgba(0, 0, 0, 0.3),
+            0 0 60px rgba(255, 255, 255, 0.2);
+        letter-spacing: 0.05em;
+    }
+}
+
+/* Second title (Svetlana Dubkova) - Smaller and more subtle */
+#title-text-2 h1 {
+    font-size: 7vw; /* Smaller than the first title */
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    opacity: 0.9;
+    white-space: nowrap;
+    text-transform: lowercase;
+    text-shadow: 
+        0 0 40px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(0, 0, 0, 0.3);
+    line-height: 1;
+}
+
+.title-text.visible {
+    opacity: 1;
+}
+
+/* Add a magical sparkle effect for Sasha Winchester */
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    animation: sparkleAnimation 3s linear infinite;
+}
+
+@keyframes sparkleAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateY(0);
+    }
+    20% {
+        opacity: 0.8;
+        transform: scale(1) translateY(-10px);
+    }
+    40% {
+        opacity: 0;
+        transform: scale(0) translateY(-20px);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0) translateY(-30px);
+    }
+}
+
+/* Subtle floating particles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.1;
+    }
+    75% {
+        opacity: 0.2;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    #title-text-1 h1 {
+        font-size: 11vw;
+    }
+    
+    #title-text-2 h1 {
+        font-size: 9vw;
+    }
+}
+
+@media (max-width: 768px) {
+    #title-text-1 h1 {
+        font-size: 13vw;
+    }
+    
+    #title-text-2 h1 {
+        font-size: 11vw;
+    }
+    
+    .title-container {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    #title-text-1 h1 {
+        font-size: 15vw;
+    }
+    
+    #title-text-2 h1 {
+        font-size: 13vw;
+    }
+    
+    .title-container {
+        height: 120px;
+    }
+}

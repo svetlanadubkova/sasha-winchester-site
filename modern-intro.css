@@ -1,0 +1,188 @@
+/* Modern Intro Screen - Clean, Bottom-Aligned */
+:root {
+    --deep-red: #8b0000;
+    --soft-red: #c53030;
+    --rich-red: #710000;
+    --pastel-peach: #ffd8c4;
+    --soft-pink: #ffb6c1;
+    --white: #ffffff;
+    --serif-font: 'Playfair Display', serif;
+    --transition-duration: 2.2s;
+}
+
+/* Video Background - Takes up full screen from the start */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    overflow: hidden;
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(139, 0, 0, 0.4);
+    z-index: -9;
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align content to bottom */
+    z-index: 2000;
+    transition: opacity var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+/* Title container - Bottom positioned */
+.title-container {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    margin-bottom: 15vh; /* Distance from bottom */
+    text-align: center;
+}
+
+/* Modern smaller title style */
+.title-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all 1.5s cubic-bezier(0.17, 0.67, 0.36, 0.93);
+}
+
+#title-text-1 h1 {
+    font-size: 6vw; /* Smaller size */
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    opacity: 0.9;
+    white-space: nowrap;
+    text-transform: lowercase;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Second title (Svetlana Dubkova) - Smaller still */
+#title-text-2 h1 {
+    font-size: 5vw; /* Smaller than the first title */
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    opacity: 0.9;
+    white-space: nowrap;
+    text-transform: lowercase;
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    line-height: 1;
+}
+
+.title-text.visible {
+    opacity: 1;
+}
+
+/* Subtle floating particles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.1;
+    }
+    75% {
+        opacity: 0.2;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    #title-text-1 h1 {
+        font-size: 7vw;
+    }
+    
+    #title-text-2 h1 {
+        font-size: 6vw;
+    }
+    
+    .title-container {
+        margin-bottom: 13vh;
+    }
+}
+
+@media (max-width: 768px) {
+    #title-text-1 h1 {
+        font-size: 8vw;
+    }
+    
+    #title-text-2 h1 {
+        font-size: 7vw;
+    }
+    
+    .title-container {
+        margin-bottom: 10vh;
+    }
+}
+
+@media (max-width: 480px) {
+    #title-text-1 h1 {
+        font-size: 9vw;
+    }
+    
+    #title-text-2 h1 {
+        font-size: 8vw;
+    }
+    
+    .title-container {
+        margin-bottom: 8vh;
+    }
+}
