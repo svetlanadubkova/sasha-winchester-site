@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="modern-intro.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="image-overlay.css">
+    <link rel="stylesheet" href="mobile-about.css">
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -19,7 +22,7 @@
 
     <!-- Video Background - Full screen background element that comes before everything else -->
     <div class="video-container">
-        <video id="bgVideo" autoplay muted loop playsinline>
+        <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline>
             <source src="background.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
@@ -74,8 +77,7 @@
                 <div class="gallery-item" data-title="digital witness">
                     <img src="probsssfave.png" alt="Digital Witness">
                     <div class="image-overlay">
-                        <p class="image-text">Take this simulation of ache, wear it like perfume.
-                        </p>
+                        <p class="image-text">Take this simulation of ache, wear it like perfume.</p>
                     </div>
                 </div>
                 <div class="gallery-item" data-title="original muse variation">
@@ -121,7 +123,7 @@
             <h2 class="section-title">contact</h2>
             <div class="contact-container">
                 <p class="contact-text">write her</p>
-                <a href="mailto:lana@sashawinchester.com" class="contact-email">lana@sashawinchester.art</a>
+                <a href="mailto:lana@sashawinchester.art" class="contact-email">lana@sashawinchester.art</a>
             </div>
         </section>
 
@@ -138,6 +140,9 @@
         </div>
     </div>
 
+    <!-- Load scripts in order of priority for mobile -->
+    <script src="mobile-video.js"></script>
+    <script src="mobile-entry.js"></script>
     <script src="script.js"></script>
     <script src="modern-intro.js"></script>
 </body>

@@ -1,0 +1,85 @@
+/* Mobile-specific About Section Styles */
+@media (max-width: 768px) {
+    /* About Container */
+    .about-container {
+        padding: 0 1rem !important;
+        width: 100% !important;
+    }
+    
+    /* Fix the flex layout for mobile */
+    .about-container > div {
+        flex-direction: column-reverse !important;
+        gap: 1.5rem !important;
+    }
+    
+    /* Portrait Container */
+    .portrait-container {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 auto !important;
+        border: none !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    
+    .portrait-image {
+        max-width: 70% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+        border: 1px solid var(--deep-red) !important;
+    }
+    
+    /* Typography adjustments */
+    .about-text {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 1rem !important;
+        text-align: left !important;
+    }
+    
+    .section-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 1.5rem !important;
+        text-align: center !important;
+    }
+    
+    /* Contact section */
+    .contact-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1rem !important;
+    }
+    
+    .contact-text {
+        font-size: 1rem !important;
+    }
+    
+    .contact-email {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Social Link */
+    .social-link {
+        font-size: 0.9rem !important;
+        margin-top: 1.5rem !important;
+    }
+    
+    /* Add padding to compensate for bottom navigation */
+    #about, #contact {
+        padding-bottom: 6rem !important;
+    }
+}
+
+/* Tablet-specific adjustments */
+@media (min-width: 481px) and (max-width: 768px) {
+    .portrait-image {
+        max-width: 50% !important;
+    }
+    
+    .about-text {
+        font-size: 1rem !important;
+    }
+}
