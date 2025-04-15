@@ -1,0 +1,41 @@
+/* Entry Button Styles */
+.enter-button {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 2rem;
+    background: rgba(139, 0, 0, 0.6);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 2px;
+    font-family: var(--serif-font);
+    font-style: italic;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: lowercase;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.enter-button:hover {
+    background: rgba(139, 0, 0, 0.8);
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.enter-button:active {
+    transform: translateX(-50%) translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Device-specific adjustments */
+@media (max-width: 768px) {
+    .enter-button {
+        bottom: 15%;
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+    }
+}

@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function initMobileEntrySequence() {
     const titleText1 = document.getElementById('title-text-1');
     const titleText2 = document.getElementById('title-text-2');
-    const loadingScreen = document.querySelector('.loading-screen');
-    const video = document.getElementById('bgVideo');
     
     // First title fade in
     setTimeout(() => {
@@ -28,15 +26,10 @@ function initMobileEntrySequence() {
         
         // Auto-proceed after display time
         setTimeout(() => {
-            // Always proceed without requiring interaction
+            // Always proceed without requiring interaction on mobile
             proceedToContent();
-        }, 2500);
+        }, 2000);
     }, 2000);
-    
-    // For cases where someone taps early, make sure we respond immediately
-    document.addEventListener('touchstart', function() {
-        proceedToContent();
-    }, { once: true });
 }
 
 function proceedToContent() {

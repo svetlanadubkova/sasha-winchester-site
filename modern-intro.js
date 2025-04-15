@@ -62,40 +62,31 @@ function createParticles() {
     }
 }
 
-function createEnterButton() {
-    const button = document.createElement('button');
-    button.classList.add('enter-button');
-    button.textContent = 'enter';
-    button.style.opacity = '0';
+function autoTransitionToContent() {
+    const loadingScreen = document.querySelector('.loading-screen');
+    const mainContent = document.querySelector('.main-content');
+    const videoContainer = document.querySelector('.video-container');
     
-    button.addEventListener('click', () => {
-        const loadingScreen = document.querySelector('.loading-screen');
-        const mainContent = document.querySelector('.main-content');
-        const videoContainer = document.querySelector('.video-container');
-        
-        // Fade out loading screen and video
-        loadingScreen.style.transition = 'opacity 2s ease-out';
-        videoContainer.style.transition = 'opacity 2s ease-out';
-        loadingScreen.style.opacity = '0';
-        videoContainer.style.opacity = '0';
-        
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-            mainContent.style.opacity = '1';
-            mainContent.style.transition = 'opacity 1.5s ease-in';
-            
-            const worksSection = document.getElementById('works');
-            worksSection.style.opacity = '0';
-            worksSection.classList.add('active');
-            worksSection.style.transition = 'opacity 1.5s ease-in';
-            
-            requestAnimationFrame(() => {
-                worksSection.style.opacity = '1';
-            });
-        }, 2000);
-    });
+    // Fade out loading screen and video
+    loadingScreen.style.transition = 'opacity 2s ease-out';
+    videoContainer.style.transition = 'opacity 2s ease-out';
+    loadingScreen.style.opacity = '0';
+    videoContainer.style.opacity = '0';
     
-    return button;
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        mainContent.style.opacity = '1';
+        mainContent.style.transition = 'opacity 1.5s ease-in';
+        
+        const worksSection = document.getElementById('works');
+        worksSection.style.opacity = '0';
+        worksSection.classList.add('active');
+        worksSection.style.transition = 'opacity 1.5s ease-in';
+        
+        requestAnimationFrame(() => {
+            worksSection.style.opacity = '1';
+        });
+    }, 2000);
 }
 
 function sequenceIntro() {
@@ -134,14 +125,9 @@ function sequenceIntro() {
                     titleText2.style.opacity = '1';
                 });
                 
+                // Auto-transition after displaying the second title
                 setTimeout(() => {
-                    const enterButton = createEnterButton();
-                    loadingScreen.appendChild(enterButton);
-                    enterButton.style.transition = 'opacity 1s ease-in';
-                    
-                    requestAnimationFrame(() => {
-                        enterButton.style.opacity = '1';
-                    });
+                    autoTransitionToContent();
                 }, 3000);
             }, 500);
         }, 3000);
