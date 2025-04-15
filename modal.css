@@ -1,0 +1,96 @@
+/* Modal styles - Separated for clarity */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.modal-image {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid #000;
+}
+
+.modal-text {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    max-width: 300px;
+    font-family: var(--serif-font);
+    font-style: italic;
+    color: var(--deep-red);
+    font-size: 1.2rem;
+    text-align: right;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: var(--deep-red);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 1001;
+}
+
+.modal-close:hover {
+    opacity: 1;
+}
+
+/* Mobile-specific modal adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .modal-image {
+        max-height: 60vh;
+        max-width: 100%;
+    }
+
+    .modal-text {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        text-align: center;
+        max-width: 90%;
+    }
+
+    .modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 1.5rem;
+    }
+}

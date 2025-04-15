@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="image-overlay.css">
     <link rel="stylesheet" href="mobile-about.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="desktop-fixes.css">
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -140,9 +142,25 @@
         </div>
     </div>
 
-    <!-- Load scripts in order of priority for mobile -->
-    <script src="mobile-video.js"></script>
-    <script src="mobile-entry.js"></script>
+    <!-- Device detection and conditional script loading -->
+    <script>
+        // Detect if mobile device
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Load appropriate scripts based on device
+        if (isMobile) {
+            // Mobile scripts
+            const mobileVideoScript = document.createElement('script');
+            mobileVideoScript.src = 'mobile-video.js';
+            document.body.appendChild(mobileVideoScript);
+            
+            const mobileEntryScript = document.createElement('script');
+            mobileEntryScript.src = 'mobile-entry.js';
+            document.body.appendChild(mobileEntryScript);
+        }
+    </script>
+    
+    <!-- Common scripts for both desktop and mobile -->
     <script src="script.js"></script>
     <script src="modern-intro.js"></script>
 </body>

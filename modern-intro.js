@@ -1,8 +1,13 @@
 // Modern Intro Animations - Subtle & Smooth
 document.addEventListener('DOMContentLoaded', () => {
-    createParticles();
-    ensureVideoIsPlaying();
-    sequenceIntro();
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (!isMobile) {
+        // Only run desktop intro sequence on desktop devices
+        createParticles();
+        ensureVideoIsPlaying();
+        sequenceIntro();
+    }
 });
 
 function ensureVideoIsPlaying() {
@@ -18,7 +23,7 @@ function ensureVideoIsPlaying() {
         
         if (playPromise !== undefined) {
             playPromise.catch(error => {
-                console.warn("Video playback failed initially, retrying...", error);
+                console.warn("Desktop video playback failed initially, retrying...", error);
                 document.addEventListener('click', function playVideoOnClick() {
                     video.play().then(() => {
                         document.removeEventListener('click', playVideoOnClick);

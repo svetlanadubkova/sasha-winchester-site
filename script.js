@@ -4,48 +4,53 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('bgVideo');
     const videoContainer = document.querySelector('.video-container');
     
-    // Make sure we can interact with the video
-    video.setAttribute('playsinline', '');
-    video.setAttribute('muted', '');
-    video.setAttribute('loop', '');
+    // Don't add play button on mobile devices
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    // Force video playback
-    video.play().catch(function(error) {
-        console.error('Video playback was prevented:', error);
+    if (!isMobile) {
+        // Desktop-only video handling
+        video.setAttribute('playsinline', '');
+        video.setAttribute('muted', '');
+        video.setAttribute('loop', '');
         
-        // If autoplay fails, create a user-triggered play button
-        const playButton = document.createElement('button');
-        playButton.textContent = 'Click to Play';
-        playButton.style.position = 'fixed';
-        playButton.style.zIndex = '9999';
-        playButton.style.top = '50%';
-        playButton.style.left = '50%';
-        playButton.style.transform = 'translate(-50%, -50%)';
-        playButton.style.padding = '1rem 2rem';
-        playButton.style.background = 'rgba(139, 0, 0, 0.7)';
-        playButton.style.color = 'white';
-        playButton.style.border = 'none';
-        playButton.style.borderRadius = '4px';
-        playButton.style.fontSize = '1.2rem';
-        playButton.style.cursor = 'pointer';
-        
-        playButton.addEventListener('click', function() {
-            video.play();
-            playButton.remove();
+        // Force video playback
+        video.play().catch(function(error) {
+            console.error('Desktop video playback was prevented:', error);
+            
+            // If autoplay fails on desktop, create a user-triggered play button
+            const playButton = document.createElement('button');
+            playButton.textContent = 'Click to Play';
+            playButton.style.position = 'fixed';
+            playButton.style.zIndex = '9999';
+            playButton.style.top = '50%';
+            playButton.style.left = '50%';
+            playButton.style.transform = 'translate(-50%, -50%)';
+            playButton.style.padding = '1rem 2rem';
+            playButton.style.background = 'rgba(139, 0, 0, 0.7)';
+            playButton.style.color = 'white';
+            playButton.style.border = 'none';
+            playButton.style.borderRadius = '4px';
+            playButton.style.fontSize = '1.2rem';
+            playButton.style.cursor = 'pointer';
+            
+            playButton.addEventListener('click', function() {
+                video.play();
+                playButton.remove();
+            });
+            
+            document.body.appendChild(playButton);
         });
         
-        document.body.appendChild(playButton);
-    });
-    
-    // Check if video is actually playing
-    setTimeout(function() {
-        if (video.paused) {
-            console.warn('Video still paused after 1 second, attempting to play again...');
-            video.play().catch(e => console.error('Second play attempt failed:', e));
-        } else {
-            console.log('Video is playing successfully');
-        }
-    }, 1000);
+        // Check if video is actually playing (desktop only)
+        setTimeout(function() {
+            if (video.paused) {
+                console.warn('Video still paused after 1 second, attempting to play again...');
+                video.play().catch(e => console.error('Second play attempt failed:', e));
+            } else {
+                console.log('Video is playing successfully');
+            }
+        }, 1000);
+    }
 });
 
 // Rose emoji cursor
@@ -63,61 +68,6 @@ document.addEventListener('mousedown', () => {
 
 document.addEventListener('mouseup', () => {
     cursor.style.transform = 'scale(1) rotate(0deg)';
-});
-
-// Loading screen animation with smoother transitions
-document.addEventListener('DOMContentLoaded', () => {
-    const loadingScreen = document.querySelector('.loading-screen');
-    const titleText = document.getElementById('title-text');
-    const subtitleText = document.getElementById('subtitle-text');
-    const mainContent = document.querySelector('.main-content');
-    const videoContainer = document.querySelector('.video-container');
-    
-    // Show title
-    setTimeout(() => {
-        titleText.style.opacity = '1';
-    }, 500);
-    
-    // Hide title, show subtitle
-    setTimeout(() => {
-        titleText.style.opacity = '0';
-        setTimeout(() => {
-            subtitleText.style.opacity = '1';
-        }, 500);
-    }, 3000);
-    
-    // Hide loading screen, transition to main content with fade
-    setTimeout(() => {
-        // Start fading out loading screen
-        loadingScreen.style.opacity = '0';
-        
-        // Create a smooth transition by overlapping the fade-out and fade-in
-        setTimeout(() => {
-            // Prepare main content to be visible but still transparent
-            mainContent.style.opacity = '0.01';
-            
-            // Begin hiding the video with a crossfade effect
-            videoContainer.style.transition = 'opacity 2s cubic-bezier(0.4, 0, 0.2, 1)';
-            videoContainer.style.opacity = '0';
-            
-            // Remove loading screen from DOM after its fade-out completes
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-                
-                // Fade in main content after video starts fading
-                mainContent.style.opacity = '1';
-                
-                // Remove video container after transition completes to improve performance
-                setTimeout(() => {
-                    videoContainer.style.display = 'none';
-                }, 2000);
-                
-                // Show the default section (works)
-                const worksSection = document.getElementById('works');
-                worksSection.classList.add('active');
-            }, 1000);
-        }, 1000);
-    }, 6000);
 });
 
 // Navigation
