@@ -4,8 +4,10 @@
   "description": "Sasha Winchester - Svetlana Dubkova Artist Portfolio",
   "main": "server.js",
   "scripts": {
+    "optimize-images": "node optimize-images.js",
     "start": "node server.js"
   },
-  "author": "Svetlana Dubkova",
-  "license": "MIT"
+  "dependencies": {
+    "sharp": "^0.32.5"
+  }
 }
