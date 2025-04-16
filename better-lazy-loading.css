@@ -1,0 +1,93 @@
+/* 
+ * Better Lazy Loading Styles
+ * Fixes issues with loading animations
+ */
+
+/* Base image styles */
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* When image is loaded */
+.lazy-image.loaded {
+  opacity: 1;
+}
+
+/* Loading states for gallery items */
+.gallery-item {
+  position: relative;
+  min-height: 150px;
+  background-color: rgba(240, 240, 240, 0.1);
+}
+
+/* Loading indicator */
+.gallery-item.is-loading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  margin: -12.5px 0 0 -12.5px;
+  border: 2px solid rgba(139, 0, 0, 0.1);
+  border-top: 2px solid var(--deep-red);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+
+/* Hide loading indicator when image is loaded */
+.gallery-item.is-loaded::before {
+  display: none;
+}
+
+/* Error state */
+.gallery-item.has-error::before {
+  content: "!";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  background: rgba(139, 0, 0, 0.1);
+  border-radius: 50%;
+  color: var(--deep-red);
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  animation: none;
+}
+
+/* Spinning animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Explicitly remove loading indicators from loaded items */
+.gallery-item.is-loaded::before,
+.gallery-item.is-loaded::after {
+  display: none !important;
+  opacity: 0 !important;
+  content: none !important;
+}
+
+/* Ensure loaded images are visible */
+.gallery-item.is-loaded img {
+  opacity: 1 !important;
+}
+
+/* Responsive sizing for gallery items */
+@media (max-width: 768px) {
+  .gallery-item {
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-item {
+    min-height: 100px;
+  }
+}

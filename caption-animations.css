@@ -1,0 +1,98 @@
+/* 
+ * Caption Animations
+ * Creates magical fade-in animations for image captions on mobile
+ */
+
+@media (max-width: 768px) {
+  /* Base caption styling */
+  .image-overlay {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    padding: 1rem !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(5px) !important;
+    border-top: 1px solid rgba(139, 0, 0, 0.2) !important;
+    
+    /* Initial state - completely invisible */
+    opacity: 0 !important;
+    transform: translateY(100%) !important;
+    pointer-events: none !important;
+    
+    /* Animation variables */
+    --overlay-transition-duration: 0.5s;
+    --overlay-transition-timing: cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* Combine transitions for a magical effect */
+    transition: 
+      opacity var(--overlay-transition-duration) var(--overlay-transition-timing),
+      transform var(--overlay-transition-duration) var(--overlay-transition-timing),
+      backdrop-filter 0.6s ease-in-out !important;
+  }
+
+  /* Caption text animation */
+  .image-text {
+    margin: 0 !important;
+    font-family: 'Playfair Display', serif !important;
+    font-style: italic !important;
+    text-align: center !important;
+    font-size: 0.9rem !important;
+    color: var(--deep-red) !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.4 !important;
+    
+    /* Text starts invisible and slightly offset */
+    opacity: 0 !important;
+    transform: translateY(10px) !important;
+    transition: 
+      opacity 0.4s ease 0.1s,
+      transform 0.4s var(--overlay-transition-timing) 0.1s !important;
+  }
+
+  /* When item is active, show the overlay with magical animation */
+  .gallery-item.active .image-overlay {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+    backdrop-filter: blur(10px) !important;
+  }
+
+  /* When item is active, animate in the text with a slight delay */
+  .gallery-item.active .image-text {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  /* Add a subtle shadow to the caption when active */
+  .gallery-item.active .image-overlay {
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.07) !important;
+  }
+  
+  /* Add a subtle animation to the image when active */
+  .gallery-item.active img {
+    transform: scale(0.98) !important;
+    transition: transform 0.4s ease-out !important;
+  }
+  
+  /* Animation stops */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

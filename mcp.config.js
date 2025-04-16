@@ -11,14 +11,13 @@ module.exports = {
     output: './'
   },
   scripts: {
-    // Optimize images to different sizes
+    // General image optimization tools
     "optimize-images": "node optimize-images.js",
-    
-    // Just compress images without resizing
     "compress-images": "node compress-images.js",
-    
-    // Create responsive image variants
     "responsive-images": "node create-responsive-images.js",
+    
+    // Mobile-specific image optimization
+    "mobile-images": "node optimize-mobile-images.js",
     
     // Install dependencies needed for image processing
     "install-deps": "npm install sharp"
