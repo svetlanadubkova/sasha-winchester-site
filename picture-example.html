@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picture Element Example</title>
+    <style>
+        .gallery-item {
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        p {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Optimized Images with &lt;picture&gt; Element</h1>
+        
+        <p>The examples below show how to use the picture element for optimal loading on both mobile and desktop. These examples will only work after you've generated the optimized images using the <code>create-github-optimized-images.js</code> script.</p>
+        
+        <div class="gallery-item">
+            <!-- Example 1: Using picture element -->
+            <picture>
+                <!-- WebP version for modern browsers on mobile -->
+                <source 
+                    srcset="mobile/actuaal-series3talkingotmyfave-mobile.webp" 
+                    media="(max-width: 768px)" 
+                    type="image/webp"
+                >
+                <!-- JPG version for older browsers on mobile -->
+                <source 
+                    srcset="mobile/actuaal-series3talkingotmyfave-mobile.jpg" 
+                    media="(max-width: 768px)"
+                >
+                <!-- Original version for desktop -->
+                <img 
+                    src="actuaal-series3talkingotmyfave.jpg" 
+                    alt="Talking To My Fave" 
+                    loading="lazy"
+                >
+            </picture>
+        </div>
+        
+        <div class="gallery-item">
+            <!-- Example 2: Using picture element -->
+            <picture>
+                <!-- WebP version for modern browsers on mobile -->
+                <source 
+                    srcset="mobile/actualfavvee333-seriers2-theoriginalmuse-mobile.webp" 
+                    media="(max-width: 768px)" 
+                    type="image/webp"
+                >
+                <!-- PNG version for older browsers on mobile -->
+                <source 
+                    srcset="mobile/actualfavvee333-seriers2-theoriginalmuse-mobile.png" 
+                    media="(max-width: 768px)"
+                >
+                <!-- Original version for desktop -->
+                <img 
+                    src="actualfavvee333-seriers2-theoriginalmuse.png" 
+                    alt="The Original Muse" 
+                    loading="lazy"
+                >
+            </picture>
+        </div>
+        
+        <div class="gallery-item">
+            <!-- Example 3: Using picture element with thumbnail as placeholder -->
+            <picture>
+                <!-- WebP version for modern browsers on mobile -->
+                <source 
+                    srcset="mobile/actualfavvvveeeeee-series1-ilikememywifelikesme-mobile.webp" 
+                    media="(max-width: 768px)" 
+                    type="image/webp"
+                >
+                <!-- PNG version for older browsers on mobile -->
+                <source 
+                    srcset="mobile/actualfavvvveeeeee-series1-ilikememywifelikesme-mobile.png" 
+                    media="(max-width: 768px)"
+                >
+                <!-- Original version for desktop with thumbnail as placeholder -->
+                <img 
+                    src="actualfavvvveeeeee-series1-ilikememywifelikesme.png" 
+                    alt="I Like Me My Wife Likes Me" 
+                    loading="lazy"
+                >
+            </picture>
+        </div>
+        
+        <p>This approach delivers:
+            <ul>
+                <li>WebP images on supporting browsers (smaller file size)</li>
+                <li>Resized images on mobile devices (faster loading)</li>
+                <li>Original high-quality images on desktop</li>
+                <li>Native lazy loading for better performance</li>
+            </ul>
+        </p>
+        
+        <p>Once you've generated the optimized images, you can replace all the image tags in your index.html with picture elements like these for the best performance.</p>
+    </div>
+</body>
+</html>
