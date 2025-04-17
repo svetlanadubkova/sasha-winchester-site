@@ -2,12 +2,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
+    // Create particles on desktop only
     if (!isMobile) {
-        // Only run desktop intro sequence on desktop devices
         createParticles();
-        ensureVideoIsPlaying();
-        sequenceIntro();
     }
+    
+    // Ensure video plays on all devices
+    ensureVideoIsPlaying();
+    
+    // Run the intro sequence for all devices
+    sequenceIntro();
 });
 
 function ensureVideoIsPlaying() {
@@ -23,7 +27,7 @@ function ensureVideoIsPlaying() {
         
         if (playPromise !== undefined) {
             playPromise.catch(error => {
-                console.warn("Desktop video playback failed initially, retrying...", error);
+                console.warn("Video playback failed initially, retrying...", error);
                 document.addEventListener('click', function playVideoOnClick() {
                     video.play().then(() => {
                         document.removeEventListener('click', playVideoOnClick);
@@ -94,6 +98,7 @@ function sequenceIntro() {
     const titleText2 = document.getElementById('title-text-2');
     const loadingScreen = document.querySelector('.loading-screen');
     const videoContainer = document.querySelector('.video-container');
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     // Initial fade in of video
     videoContainer.style.opacity = '0';
@@ -102,6 +107,26 @@ function sequenceIntro() {
         videoContainer.style.opacity = '1';
     });
     
+    // Mobile gets a faster intro
+    if (isMobile) {
+        // Shorter intro for mobile - just show the second title briefly and go to content
+        titleText2.style.opacity = '0';
+        titleText2.classList.add('visible');
+        titleText2.style.transition = 'opacity 1s ease-in-out';
+        
+        requestAnimationFrame(() => {
+            titleText2.style.opacity = '1';
+        });
+        
+        // Go directly to main content after 2 seconds
+        setTimeout(() => {
+            autoTransitionToContent();
+        }, 2000);
+        
+        return;
+    }
+    
+    // Desktop gets the full fancy intro
     setTimeout(() => {
         titleText1.style.opacity = '0';
         titleText1.classList.add('visible');
@@ -133,3 +158,14 @@ function sequenceIntro() {
         }, 3000);
     }, 1000);
 }
+
+// Failsafe: if for some reason the intro gets stuck, force transition to main content after 10 seconds
+setTimeout(() => {
+    const loadingScreen = document.querySelector('.loading-screen');
+    const mainContent = document.querySelector('.main-content');
+    
+    if (loadingScreen && loadingScreen.style.opacity !== '0' && mainContent) {
+        console.log('Failsafe: Forcing transition to main content');
+        autoTransitionToContent();
+    }
+}, 10000);
