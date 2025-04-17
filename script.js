@@ -93,6 +93,7 @@ navLinks.forEach(link => {
 // Modal functionality
 const galleryItems = document.querySelectorAll('.gallery-item');
 const modal = document.querySelector('.modal');
+const modalContent = document.querySelector('.modal-content');
 const modalImage = document.querySelector('.modal-image');
 const modalText = document.querySelector('.modal-text');
 const modalClose = document.querySelector('.modal-close');
@@ -118,17 +119,24 @@ galleryItems.forEach(item => {
         modalText.textContent = text;
         
         modal.classList.add('active');
+        
+        // Prevent body scrolling
+        document.body.style.overflow = 'hidden';
     });
 });
 
 modalClose.addEventListener('click', () => {
     modal.classList.remove('active');
+    // Restore scrolling
+    document.body.style.overflow = '';
 });
 
 // Close modal when clicking outside
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         modal.classList.remove('active');
+        // Restore scrolling
+        document.body.style.overflow = '';
     }
 });
 

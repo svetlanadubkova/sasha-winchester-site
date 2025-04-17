@@ -8,21 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     
-    <!-- Mobile-specific styles - need to load first for priority -->
-    <link rel="stylesheet" href="mobile-background.css">
-    <link rel="stylesheet" href="direct-mobile.css">
-    <link rel="stylesheet" href="caption-animations.css">
-    <link rel="stylesheet" href="touch-effects.css">
-    <link rel="stylesheet" href="mobile-image-interactions.css">
-    <link rel="stylesheet" href="mobile-image-optimizer.css">
-    
-    <!-- Core styles -->
+    <!-- Core styles only - removed redundant CSS files -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="modern-intro.css">
+    <link rel="stylesheet" href="caption-animations.css">
+    
+    <!-- Mobile-specific styles -->
     <link rel="stylesheet" href="mobile.css">
-    <link rel="stylesheet" href="image-overlay.css">
     <link rel="stylesheet" href="mobile-about.css">
-    <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="desktop-fixes.css">
 </head>
 <body>
@@ -32,7 +25,7 @@
     <!-- Grain Overlay -->
     <div class="grain-overlay"></div>
 
-    <!-- Video Background - Full screen background element that comes before everything else -->
+    <!-- Video Background -->
     <div class="video-container">
         <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline>
             <source src="background.mp4" type="video/mp4">
@@ -143,7 +136,7 @@
         <footer>the future will be tender.</footer>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal - Clean implementation -->
     <div class="modal">
         <div class="modal-content">
             <img src="" alt="" class="modal-image">
@@ -152,12 +145,7 @@
         </div>
     </div>
     
-    <!-- Mobile-specific scripts -->
-    <script src="direct-mobile.js"></script>
-    <script src="mobile-image-interactions.js"></script>
-    <script src="mobile-image-optimizer.js"></script>
-    
-    <!-- Core scripts - always loaded -->
+    <!-- Core scripts only -->
     <script src="script.js"></script>
     <script src="modern-intro.js"></script>
 </body>
