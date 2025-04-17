@@ -273,3 +273,329 @@ html, body {
 }
 
 @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+h2.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.8s ease;
+    background: var(--white);
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s ease;
+    display: block;
+}
+
+.gallery-item:nth-child(6) img {
+    object-position: 40% center;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Image overlay is hidden as requested */
+.image-overlay {
+    display: none;
+}
+
+/* MODAL - FULLSCREEN WITH IMAGE BORDER */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: none;
+    background-color: transparent;
+}
+
+.modal-image {
+    max-width: 80%;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 1px solid black; /* ONLY the image has a border */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+}
+
+.modal-text {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    max-width: 300px;
+    font-family: var(--serif-font);
+    font-style: italic;
+    color: var(--deep-red);
+    font-size: 1.2rem;
+    text-align: right;
+    border: none;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: var(--deep-red);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 10000;
+    border: none;
+}
+
+.modal-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+/* Cursor enhancements for modals */
+.modal.active ~ #cursor,
+.modal.active + #cursor,
+#cursor {
+    z-index: 100000 !important;
+    visibility: visible !important;
+    display: block !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+}
+
+/* Contact section styling */
+.contact-container {
+    text-align: center;
+}
+
+.contact-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.contact-email {
+    font-size: 1.5rem;
+    color: var(--deep-red);
+    text-decoration: none;
+    border-bottom: 1px solid var(--deep-red);
+    padding-bottom: 0.2rem;
+    transition: opacity 0.3s ease;
+}
+
+.contact-email:hover {
+    opacity: 0.8;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Mobile Styles - Redesigned for a clean, gallery-like experience */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
+    /* Mobile navigation */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    nav a {
+        color: var(--deep-red);
+        text-decoration: none;
+        font-size: 1rem;
+        font-style: italic;
+        letter-spacing: 0.05em;
+    }
+    
+    /* Mobile sections */
+    .section {
+        padding: 5rem 1rem 2rem;
+        display: none;
+        min-height: 80vh;
+    }
+    
+    .section.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Mobile gallery */
+    .gallery-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+    }
+    
+    .gallery-item {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+    }
+    
+    .gallery-item img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+    }
+    
+    /* Mobile modal */
+    .modal-image {
+        max-width: 90%;
+        max-height: 75vh;
+        border: 1px solid black;
+    }
+    
+    .modal-text {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        text-align: center;
+        max-width: 90%;
+        padding: 0 1rem;
+    }
+    
+    .modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 1.5rem;
+    }
+    
+    /* Mobile about section */
+    .about-container {
+        padding: 0 1rem;
+    }
+    
+    .about-container > div {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 1.5rem;
+    }
+    
+    .portrait-container {
+        margin: 0 auto 1rem;
+        width: 100%;
+        max-width: 250px;
+        border: 1px solid var(--deep-red);
+    }
+    
+    .portrait-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    .about-content {
+        width: 100%;
+    }
+    
+    .about-text {
+        font-size: 0.85rem;
+        text-align: left;
+        line-height: 1.5;
+    }
+    
+    .social-link {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+    }
+    
+    /* Mobile contact section */
+    .contact-container {
+        text-align: center;
+        padding: 0 1rem;
+    }
+    
+    .contact-text {
+        font-size: 1.1rem;
+    }
+    
+    .contact-email {
+        font-size: 1.3rem;
+    }
+    
+    /* Mobile title container */
+    .title-container {
+        margin-left: 2rem !important;
+    }
+    
+    .title-text h1 {
+        font-size: 2rem !important;
+    }
+    
+    /* Mobile footer */
+    footer {
+        margin-top: 2rem;
+        padding: 1rem 0;
+        text-align: center;
+        font-style: italic;
+        font-size: 0.8rem;
+    }
+}
