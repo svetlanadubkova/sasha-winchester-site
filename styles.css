@@ -169,101 +169,100 @@ html, body {
     background: var(--white);
 }
 
-/* Desktop Navigation */
-@media (min-width: 769px) {
-    nav {
-        position: fixed;
-        top: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 2rem;
-        z-index: 100;
-    }
-
-    nav a {
-        color: var(--deep-red);
-        text-decoration: none;
-        position: relative;
-        font-size: 1.2rem;
-        opacity: 0.8;
-        transition: opacity 0.5s ease;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-        font-style: italic;
-    }
-
-    nav a:hover {
-        opacity: 1;
-    }
-
-    nav a::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 1px;
-        bottom: -4px;
-        left: 0;
-        background-color: var(--deep-red);
-        transition: width 0.5s ease;
-    }
-
-    nav a:hover::after {
-        width: 100%;
-    }
-
-    .section {
-        min-height: 100vh;
-        padding: 6rem 2rem 2rem;
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        z-index: 1;
-    }
-
-    .gallery-container {
-        width: 100%;
-        max-width: 1800px;
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-auto-rows: minmax(200px, auto);
-        gap: 20px;
-        padding: 0 20px;
-    }
-
-    .gallery-item:nth-child(1) {
-        grid-column: 2 / 8;
-        grid-row: 1 / 3;
-    }
-
-    .gallery-item:nth-child(2) {
-        grid-column: 8 / 12;
-        grid-row: 1 / 2;
-    }
-
-    .gallery-item:nth-child(3) {
-        grid-column: 8 / 12;
-        grid-row: 2 / 3;
-    }
-
-    .gallery-item:nth-child(4) {
-        grid-column: 2 / 6;
-        grid-row: 3 / 4;
-    }
-
-    .gallery-item:nth-child(5) {
-        grid-column: 6 / 10;
-        grid-row: 3 / 4;
-    }
-
-    .gallery-item:nth-child(6) {
-        grid-column: 10 / 12;
-        grid-row: 3 / 4;
-    }
+/* Common navigation styling for all devices */
+nav {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2rem;
+    z-index: 100;
 }
 
-/* About section styles - fixed for desktop view */
+nav a {
+    color: var(--deep-red);
+    text-decoration: none;
+    position: relative;
+    font-size: 1.2rem;
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-style: italic;
+}
+
+nav a:hover {
+    opacity: 1;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--deep-red);
+    transition: width 0.5s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.section {
+    min-height: 100vh;
+    padding: 6rem 2rem 2rem;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Common gallery layout for all devices */
+.gallery-container {
+    width: 100%;
+    max-width: 1800px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.gallery-item:nth-child(1) {
+    grid-column: 2 / 8;
+    grid-row: 1 / 3;
+}
+
+.gallery-item:nth-child(2) {
+    grid-column: 8 / 12;
+    grid-row: 1 / 2;
+}
+
+.gallery-item:nth-child(3) {
+    grid-column: 8 / 12;
+    grid-row: 2 / 3;
+}
+
+.gallery-item:nth-child(4) {
+    grid-column: 2 / 6;
+    grid-row: 3 / 4;
+}
+
+.gallery-item:nth-child(5) {
+    grid-column: 6 / 10;
+    grid-row: 3 / 4;
+}
+
+.gallery-item:nth-child(6) {
+    grid-column: 10 / 12;
+    grid-row: 3 / 4;
+}
+
+/* About section styles - for desktop */
 .about-container {
     display: flex;
     flex-direction: column;
@@ -512,97 +511,103 @@ footer {
     opacity: 0.8;
 }
 
-/* Mobile Styles - Redesigned for a clean, gallery-like experience */
+/* Desktop-specific adjustments */
+@media (min-width: 769px) {
+    .gallery-container {
+        grid-auto-rows: minmax(200px, auto);
+    }
+    
+    .main-content {
+        padding: 2rem;
+    }
+}
+
+/* Mobile Styles - Desktop-like grid but with original about section */
 @media (max-width: 768px) {
     body {
         font-size: 14px;
         cursor: auto; /* Allow normal cursor on mobile */
     }
     
-    /* Mobile navigation */
+    /* Mobile navigation adjustments - smaller fonts and closer to top */
     nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.95);
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        padding: 1rem 0;
-        z-index: 100;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        top: 0.5rem;
+        gap: 1.5rem;
     }
     
     nav a {
-        color: var(--deep-red);
-        text-decoration: none;
-        font-size: 1rem;
-        font-style: italic;
-        letter-spacing: 0.05em;
+        font-size: 0.9rem;
     }
     
-    /* Mobile sections */
+    /* Mobile sections - much smaller padding to reduce whitespace */
     .section {
-        padding: 5rem 1rem 2rem;
-        display: none;
-        min-height: 80vh;
+        padding: 2.75rem 0.25rem 0.25rem;
+        min-height: auto; /* Remove min-height to reduce extra whitespace */
     }
     
-    .section.active {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    /* Reduce padding on main content for mobile */
+    .main-content {
+        padding: 0.5rem 0.25rem;
     }
     
-    /* Mobile gallery */
+    /* Mobile gallery - same grid but with larger sizes and less padding */
     .gallery-container {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
         width: 100%;
+        gap: 6px;
+        padding: 0 2px;
+        grid-auto-rows: minmax(80px, auto); /* Larger minimum size for better visibility */
     }
     
-    .gallery-item {
-        width: 100%;
-        margin-bottom: 0.5rem;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        border-radius: 2px;
+    /* Making the grid span more of the screen width on mobile */
+    .gallery-item:nth-child(1) {
+        grid-column: 1 / 8; /* Start from the edge */
     }
     
-    .gallery-item img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 4/3;
-        object-fit: cover;
+    .gallery-item:nth-child(2) {
+        grid-column: 8 / 13; /* Extend to the edge */
     }
-
-    /* Mobile-specific image crops - adjusted even more */
+    
+    .gallery-item:nth-child(3) {
+        grid-column: 8 / 13; /* Extend to the edge */
+    }
+    
+    .gallery-item:nth-child(4) {
+        grid-column: 1 / 5; /* Start from the edge */
+    }
+    
+    .gallery-item:nth-child(5) {
+        grid-column: 5 / 9;
+    }
+    
+    .gallery-item:nth-child(6) {
+        grid-column: 9 / 13; /* Extend to the edge */
+    }
+    
+    /* Mobile image crops */
     .gallery-item:nth-child(1) img {
-        object-position: center 95%; /* Show even more of the bottom */
+        object-position: center 95%; /* More of the bottom on mobile */
     }
     
     .gallery-item:nth-child(2) img {
-        object-position: center 90%; /* Show even more of the bottom */
+        object-position: center 90%; /* More of the bottom on mobile */
     }
     
     .gallery-item:nth-child(3) img {
-        object-position: center 25%; /* Show more of the top */
+        object-position: center 25%; /* More of the top on mobile */
     }
     
     .gallery-item:nth-child(4) img {
-        object-position: center 30%; /* Show more of the top */
+        object-position: center 30%; /* More of the top on mobile */
     }
     
     .gallery-item:nth-child(5) img {
-        object-position: center 85%; /* Show even more of the bottom */
+        object-position: center 85%; /* More of the bottom on mobile */
     }
     
-    /* Mobile modal */
+    /* Mobile modal adjustments */
     .modal-image {
         max-width: 90%;
-        max-height: 75vh;
-        border: 1px solid black;
+        max-height: 70vh;
     }
     
     .modal-text {
@@ -622,7 +627,7 @@ footer {
         font-size: 1.5rem;
     }
     
-    /* Mobile about section */
+    /* ORIGINAL MOBILE ABOUT SECTION THAT YOU LIKED */
     .about-container {
         padding: 0 1rem;
     }
@@ -662,35 +667,35 @@ footer {
         margin-top: 1rem;
     }
     
-    /* Mobile contact section */
-    .contact-container {
-        text-align: center;
-        padding: 0 1rem;
+    /* Section title size adjusted for mobile */
+    h2.section-title {
+        font-size: 1.8rem; 
+        margin-bottom: 1.5rem;
     }
     
+    /* Mobile contact section - more compact */
     .contact-text {
-        font-size: 1.1rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
     }
     
     .contact-email {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
     
     /* Mobile title container */
     .title-container {
-        margin-left: 2rem !important;
+        margin-left: 1rem !important;
     }
     
     .title-text h1 {
-        font-size: 2rem !important;
+        font-size: 1.8rem !important;
     }
     
-    /* Mobile footer */
+    /* Mobile footer - minimal padding */
     footer {
-        margin-top: 2rem;
-        padding: 1rem 0;
-        text-align: center;
-        font-style: italic;
-        font-size: 0.8rem;
+        margin-top: 0.5rem;
+        padding: 0.5rem 0;
+        font-size: 0.75rem;
     }
 }
