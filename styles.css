@@ -23,20 +23,70 @@ html, body {
     font-size: 16px;
     text-transform: lowercase;
     letter-spacing: 0.02em;
-    cursor: none;
 }
 
-/* Rose emoji cursor */
-#cursor {
-    position: fixed;
-    width: 30px;
-    height: 30px;
-    pointer-events: none;
-    z-index: 9999;
-    font-size: 24px;
-    transform-origin: center;
-    user-select: none;
-    line-height: 1;
+/* Desktop-only cursor styling */
+@media (min-width: 769px) {
+    html, body {
+        cursor: none;
+    }
+    
+    #cursor {
+        position: fixed;
+        width: 30px;
+        height: 30px;
+        pointer-events: none;
+        z-index: 9999;
+        font-size: 24px;
+        transform-origin: center;
+        user-select: none;
+        line-height: 1;
+        display: block;
+    }
+}
+
+/* Mobile floating rose */
+@media (max-width: 768px) {
+    #cursor {
+        display: none; /* Hide the cursor-following rose */
+    }
+    
+    .floating-rose {
+        position: fixed;
+        font-size: 24px;
+        z-index: 50;
+        pointer-events: none;
+        animation: floatAround 15s linear infinite;
+        opacity: 1; /* Fully opaque rose */
+    }
+}
+
+@keyframes floatAround {
+    0% {
+        top: 20%;
+        left: 20%;
+        transform: rotate(0deg);
+    }
+    25% {
+        top: 80%;
+        left: 30%;
+        transform: rotate(90deg);
+    }
+    50% {
+        top: 50%;
+        left: 80%;
+        transform: rotate(180deg);
+    }
+    75% {
+        top: 10%;
+        left: 70%;
+        transform: rotate(270deg);
+    }
+    100% {
+        top: 20%;
+        left: 20%;
+        transform: rotate(360deg);
+    }
 }
 
 /* Video Background - Only for intro screen */
@@ -309,8 +359,29 @@ h2.section-title {
     display: block;
 }
 
+/* Individual image positioning for better crops */
+.gallery-item:nth-child(1) img {
+    object-position: center 65%; /* Show more of the bottom */
+}
+
+.gallery-item:nth-child(2) img {
+    object-position: center 60%; /* Show more of the bottom */
+}
+
+.gallery-item:nth-child(3) img {
+    object-position: center 30%; /* Show more of the top */
+}
+
+.gallery-item:nth-child(4) img {
+    object-position: center 35%; /* Show more of the top */
+}
+
+.gallery-item:nth-child(5) img {
+    object-position: center 65%; /* Show more of the bottom */
+}
+
 .gallery-item:nth-child(6) img {
-    object-position: 40% center;
+    object-position: 40% center; /* Keep original position */
 }
 
 .gallery-item:hover img {
@@ -397,15 +468,17 @@ h2.section-title {
     transform: rotate(90deg);
 }
 
-/* Cursor enhancements for modals */
-.modal.active ~ #cursor,
-.modal.active + #cursor,
-#cursor {
-    z-index: 100000 !important;
-    visibility: visible !important;
-    display: block !important;
-    opacity: 1 !important;
-    pointer-events: none !important;
+/* Cursor enhancements for modals - desktop only */
+@media (min-width: 769px) {
+    .modal.active ~ #cursor,
+    .modal.active + #cursor,
+    #cursor {
+        z-index: 100000 !important;
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+        pointer-events: none !important;
+    }
 }
 
 /* Contact section styling */
@@ -443,6 +516,7 @@ footer {
 @media (max-width: 768px) {
     body {
         font-size: 14px;
+        cursor: auto; /* Allow normal cursor on mobile */
     }
     
     /* Mobile navigation */
@@ -501,6 +575,27 @@ footer {
         height: auto;
         aspect-ratio: 4/3;
         object-fit: cover;
+    }
+
+    /* Mobile-specific image crops - adjusted even more */
+    .gallery-item:nth-child(1) img {
+        object-position: center 95%; /* Show even more of the bottom */
+    }
+    
+    .gallery-item:nth-child(2) img {
+        object-position: center 90%; /* Show even more of the bottom */
+    }
+    
+    .gallery-item:nth-child(3) img {
+        object-position: center 25%; /* Show more of the top */
+    }
+    
+    .gallery-item:nth-child(4) img {
+        object-position: center 30%; /* Show more of the top */
+    }
+    
+    .gallery-item:nth-child(5) img {
+        object-position: center 85%; /* Show even more of the bottom */
     }
     
     /* Mobile modal */

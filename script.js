@@ -51,24 +51,39 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 1000);
     }
+    
+    // Create the floating rose on mobile
+    if (isMobile) {
+        createFloatingRose();
+    }
 });
 
-// Rose emoji cursor
+// Create a floating rose that moves around the screen on mobile
+function createFloatingRose() {
+    const floatingRose = document.createElement('div');
+    floatingRose.classList.add('floating-rose');
+    floatingRose.innerHTML = '🌹';
+    document.body.appendChild(floatingRose);
+}
+
+// Rose emoji cursor - desktop only
 const cursor = document.getElementById('cursor');
-cursor.innerHTML = '🌹'; // Rose emoji
+if (cursor) {
+    cursor.innerHTML = '🌹'; // Rose emoji
 
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = (e.clientX - 12) + 'px'; // Center the rose emoji
-    cursor.style.top = (e.clientY - 12) + 'px';  // Center the rose emoji
-});
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = (e.clientX - 12) + 'px'; // Center the rose emoji
+        cursor.style.top = (e.clientY - 12) + 'px';  // Center the rose emoji
+    });
 
-document.addEventListener('mousedown', () => {
-    cursor.style.transform = 'scale(0.8) rotate(15deg)'; // Add a rotation effect on click
-});
+    document.addEventListener('mousedown', () => {
+        cursor.style.transform = 'scale(0.8) rotate(15deg)'; // Add a rotation effect on click
+    });
 
-document.addEventListener('mouseup', () => {
-    cursor.style.transform = 'scale(1) rotate(0deg)';
-});
+    document.addEventListener('mouseup', () => {
+        cursor.style.transform = 'scale(1) rotate(0deg)';
+    });
+}
 
 // Navigation
 const navLinks = document.querySelectorAll('.nav-link');
