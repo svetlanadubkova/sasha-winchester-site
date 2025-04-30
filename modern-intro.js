@@ -2,17 +2,63 @@
 document.addEventListener('DOMContentLoaded', () => {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    // Create particles on desktop only
-    if (!isMobile) {
-        createParticles();
+    // Check for hash in URL to bypass intro if specific section is requested
+    if (window.location.hash) {
+        // Skip intro animation and go directly to the requested section
+        skipIntro();
+        
+        // After a small delay, scroll to the target section
+        setTimeout(() => {
+            const targetSection = document.querySelector(window.location.hash);
+            if (targetSection) {
+                // Make sure the section is active and visible
+                const allSections = document.querySelectorAll('.section');
+                allSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                targetSection.classList.add('active');
+                
+                // Scroll to the section
+                targetSection.scrollIntoView();
+            }
+        }, 100);
+    } else {
+        // Create particles on desktop only
+        if (!isMobile) {
+            createParticles();
+        }
+        
+        // Ensure video plays on all devices
+        ensureVideoIsPlaying();
+        
+        // Run the intro sequence for all devices
+        sequenceIntro();
+    }
+});
+
+function skipIntro() {
+    const loadingScreen = document.querySelector('.loading-screen');
+    const mainContent = document.querySelector('.main-content');
+    const videoContainer = document.querySelector('.video-container');
+    
+    // Immediately hide loading screen
+    if (loadingScreen) {
+        loadingScreen.style.display = 'none';
     }
     
-    // Ensure video plays on all devices
-    ensureVideoIsPlaying();
+    // Make main content visible
+    if (mainContent) {
+        mainContent.style.opacity = '1';
+    }
     
-    // Run the intro sequence for all devices
-    sequenceIntro();
-});
+    // Set video opacity
+    if (videoContainer) {
+        videoContainer.style.opacity = '1';
+    }
+    
+    // Setup navigation behaviors
+    setupNavigation();
+}
 
 function ensureVideoIsPlaying() {
     const video = document.getElementById('bgVideo');
@@ -90,7 +136,36 @@ function autoTransitionToContent() {
         requestAnimationFrame(() => {
             worksSection.style.opacity = '1';
         });
+        
+        // Setup navigation behaviors after content is shown
+        setupNavigation();
     }, 2000);
+}
+
+function setupNavigation() {
+    // Setup navigation click handlers
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.section');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                targetSection.classList.add('active');
+                
+                // Update URL without reloading
+                history.pushState(null, null, `#${targetId}`);
+            }
+        });
+    });
 }
 
 function sequenceIntro() {

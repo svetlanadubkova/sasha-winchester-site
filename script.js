@@ -1,5 +1,11 @@
 // Ensure video playback on page load
 document.addEventListener('DOMContentLoaded', function() {
+    // Process hash links on page load
+    if (window.location.hash) {
+        // Immediately activate the target section
+        activateSection(window.location.hash.substring(1));
+    }
+    
     // Get the video element
     const video = document.getElementById('bgVideo');
     const videoContainer = document.querySelector('.video-container');
@@ -58,6 +64,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Function to activate a specific section
+function activateSection(sectionId) {
+    const sections = document.querySelectorAll('.section');
+    const targetSection = document.getElementById(sectionId);
+    
+    if (!targetSection) return;
+    
+    // Hide all sections
+    sections.forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show target section
+    targetSection.classList.add('active');
+    
+    // Update URL without causing page reload
+    history.pushState(null, null, `#${sectionId}`);
+}
+
+// Listen for hash changes in the URL
+window.addEventListener('hashchange', function() {
+    const sectionId = window.location.hash.substring(1);
+    activateSection(sectionId);
+});
+
 // Create a floating rose that moves around the screen on mobile
 function createFloatingRose() {
     const floatingRose = document.createElement('div');
@@ -94,14 +125,7 @@ navLinks.forEach(link => {
         e.preventDefault();
         
         const targetId = link.getAttribute('href').substring(1);
-        
-        // Hide all sections
-        sections.forEach(section => {
-            section.classList.remove('active');
-        });
-        
-        // Show target section
-        document.getElementById(targetId).classList.add('active');
+        activateSection(targetId);
     });
 });
 
