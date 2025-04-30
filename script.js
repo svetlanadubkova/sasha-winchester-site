@@ -116,16 +116,54 @@ if (cursor) {
     });
 }
 
-// Navigation
+// Navigation - Updated to handle external links
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('.section');
 
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
+        // Check if this is an external link
+        if (link.classList.contains('external-link')) {
+            // Let the default behavior happen (follow the href)
+            return;
+        }
+        
+        // For internal links, prevent default behavior and use custom navigation
         e.preventDefault();
         
         const targetId = link.getAttribute('href').substring(1);
-        activateSection(targetId);
+        
+        // If this is a section on the current page
+        if (document.getElementById(targetId)) {
+            // Get current active section for transition
+            const currentSection = document.querySelector('.section.active');
+            const targetSection = document.getElementById(targetId);
+            
+            // Add class for smooth exit transition
+            if (currentSection) {
+                currentSection.style.opacity = '0';
+                
+                // Wait for exit transition to complete
+                setTimeout(() => {
+                    currentSection.classList.remove('active');
+                    
+                    // Show new section with entrance animation
+                    targetSection.classList.add('active');
+                    targetSection.style.opacity = '0';
+                    
+                    // Trigger entrance animation
+                    setTimeout(() => {
+                        targetSection.style.opacity = '1';
+                    }, 50);
+                }, 400);
+            } else {
+                // If no current section, just show target
+                targetSection.classList.add('active');
+            }
+            
+            // Update URL
+            history.pushState(null, null, `#${targetId}`);
+        }
     });
 });
 
@@ -147,68 +185,38 @@ const poeticTexts = {
     'second original muse': "the machine sees you and stutters. your body rendered as dataset, your gaze a recursion i can't escape."
 };
 
-galleryItems.forEach(item => {
-    item.addEventListener('click', () => {
-        const imgSrc = item.querySelector('img').getAttribute('src');
-        const title = item.getAttribute('data-title');
-        const text = poeticTexts[title];
-        
-        modalImage.setAttribute('src', imgSrc);
-        modalImage.setAttribute('alt', title);
-        modalText.textContent = text;
-        
-        modal.classList.add('active');
-        
-        // Prevent body scrolling
-        document.body.style.overflow = 'hidden';
-    });
-});
-
-modalClose.addEventListener('click', () => {
-    modal.classList.remove('active');
-    // Restore scrolling
-    document.body.style.overflow = '';
-});
-
-// Close modal when clicking outside
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.classList.remove('active');
-        // Restore scrolling
-        document.body.style.overflow = '';
-    }
-});
-
-// Enhance transitions for section switching
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Get current active section for transition
-        const currentSection = document.querySelector('.section.active');
-        const targetId = link.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
-        
-        // Add class for smooth exit transition
-        if (currentSection) {
-            currentSection.style.opacity = '0';
+if (galleryItems.length > 0 && modal) {
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const imgSrc = item.querySelector('img').getAttribute('src');
+            const title = item.getAttribute('data-title');
+            const text = poeticTexts[title];
             
-            // Wait for exit transition to complete
-            setTimeout(() => {
-                currentSection.classList.remove('active');
-                
-                // Show new section with entrance animation
-                targetSection.classList.add('active');
-                targetSection.style.opacity = '0';
-                
-                // Trigger entrance animation
-                setTimeout(() => {
-                    targetSection.style.opacity = '1';
-                }, 50);
-            }, 400);
-        } else {
-            // If no current section, just show target
-            targetSection.classList.add('active');
+            modalImage.setAttribute('src', imgSrc);
+            modalImage.setAttribute('alt', title);
+            modalText.textContent = text;
+            
+            modal.classList.add('active');
+            
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    if (modalClose) {
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+            // Restore scrolling
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            // Restore scrolling
+            document.body.style.overflow = '';
         }
     });
-});
+}

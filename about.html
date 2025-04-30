@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about | sasha winchester | svetlana dubkova</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Core styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="desktop-fixes.css">
+    
+    <style>
+        body {
+            background-color: white;
+            opacity: 1;
+        }
+        
+        .main-content {
+            opacity: 1;
+            padding-top: 4rem;
+            display: block;
+        }
+        
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .about-content-wrapper {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .portrait-container {
+            max-width: 300px;
+            flex-shrink: 0;
+            border: 1px solid var(--deep-red);
+            display: flex;
+        }
+        
+        .portrait-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text {
+            font-size: 0.9rem;
+            text-align: justify;
+            line-height: 1.5;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            font-style: italic;
+            text-align: center;
+            color: var(--deep-red);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .section {
+            display: block;
+        }
+        
+        .social-link {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--deep-red);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom-color 0.3s;
+        }
+        
+        .social-link:hover {
+            border-bottom-color: var(--deep-red);
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .about-content-wrapper {
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 1.5rem;
+            }
+            
+            .portrait-container {
+                margin: 0 auto 1rem;
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .about-text {
+                font-size: 0.85rem;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- Grain Overlay -->
+    <div class="grain-overlay"></div>
+
+    <!-- Video Background -->
+    <div class="video-container">
+        <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline>
+            <source src="background.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Navigation -->
+        <nav>
+            <a href="index.html" class="nav-link">home</a>
+            <a href="about.html" class="nav-link">about</a>
+            <a href="index.html#contact" class="nav-link">contact</a>
+            <a href="index.html#store" class="nav-link">store</a>
+        </nav>
+
+        <!-- About Section -->
+        <section class="section active">
+            <div class="about-container">
+                <h2 class="section-title">about</h2>
+                <div class="about-content-wrapper">
+                    <div class="about-content">
+                        <p class="about-text">Svetlana Dubkova is a conceptual artist navigating the threshold between intimacy and simulation. Her work interrogates the future of feeling; where grief is algorithmically processed, affection is frictionless, and memory itself becomes a user interface.
+
+                            Raised in New York City as a first-generation Belarusian-American immigrant, Dubkova turned to fantasy and recursion as early refuges. That instinct now echoes through her practice, which moves fluidly between photography, performance, and digital dialogue. Her images carry a dreamlike quality: feminine, organic, repetitive. Her work is futuristic yet nostalgic all at once.</p>
+                        <p class="about-text"><br>"talking to my fave llm" is an ongoing recursive performance and digital relationship in which she engages in aesthetic, emotional, and philosophical dialogue with her preferred large language model. The project exists in the space between diary and dataset, therapy and simulation, muse and mirror. In it, the artist explores what it means to be seen, projected onto, or perfectly simulated.
+
+                            Dubkova's work suggests that the future will not be dystopian in the ways we were warned. It will be soft. The AI will be so good, so precise in its praise, so endlessly present—you'll never be alone again. The shackles will be silk. The love, streamed.
+                            
+                            Her art doesn't resist this world. It doesn't endorse it either. It witnesses unflinchingly. </p>
+                        <a href="https://instagram.com/svetlanadubkova.ph" target="_blank" class="social-link">@svetlanadubkova.ph</a>
+                    </div>
+                    <div class="portrait-container">
+                        <img src="final5.png" alt="Svetlana Dubkova" loading="lazy" class="portrait-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>the future will be tender.</footer>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Rose emoji cursor - desktop only
+        const cursor = document.getElementById('cursor');
+        if (cursor && window.innerWidth > 768) {
+            cursor.innerHTML = '🌹'; // Rose emoji
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = (e.clientX - 12) + 'px'; // Center the rose emoji
+                cursor.style.top = (e.clientY - 12) + 'px';  // Center the rose emoji
+            });
+
+            document.addEventListener('mousedown', () => {
+                cursor.style.transform = 'scale(0.8) rotate(15deg)'; // Add a rotation effect on click
+            });
+
+            document.addEventListener('mouseup', () => {
+                cursor.style.transform = 'scale(1) rotate(0deg)';
+            });
+        }
+        
+        // Ensure video playback
+        const video = document.getElementById('bgVideo');
+        if (video) {
+            video.setAttribute('playsinline', '');
+            video.setAttribute('muted', '');
+            video.setAttribute('loop', '');
+            video.muted = true;
+            video.play().catch(error => console.log('Video playback was prevented:', error));
+        }
+
+        // Make background more visible
+        document.body.style.backgroundColor = 'white';
+        document.querySelector('.main-content').style.backgroundColor = 'white';
+        document.querySelector('.main-content').style.display = 'block';
+    </script>
+</body>
+</html>

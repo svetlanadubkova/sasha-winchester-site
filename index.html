@@ -155,58 +155,6 @@
             }
         }
 
-        /* Floating decorative elements */
-        .floating-element {
-            position: absolute;
-            pointer-events: none;
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        .floating-rose-1 {
-            font-size: 5rem;
-            top: 10%;
-            left: 5%;
-            animation: floatAround 25s linear infinite;
-        }
-
-        .floating-rose-2 {
-            font-size: 3rem;
-            bottom: 15%;
-            right: 10%;
-            animation: floatAround 20s linear infinite reverse;
-        }
-
-        .floating-text {
-            font-family: var(--serif-font);
-            font-style: italic;
-            color: var(--deep-red);
-            white-space: nowrap;
-        }
-
-        .floating-text-1 {
-            font-size: 2rem;
-            top: 30%;
-            right: 15%;
-            animation: floatSideways 15s ease-in-out infinite;
-        }
-
-        .floating-text-2 {
-            font-size: 1.5rem;
-            bottom: 25%;
-            left: 20%;
-            animation: floatSideways 18s ease-in-out infinite reverse;
-        }
-
-        @keyframes floatSideways {
-            0%, 100% {
-                transform: translateX(0) rotate(-2deg);
-            }
-            50% {
-                transform: translateX(50px) rotate(2deg);
-            }
-        }
-
         /* Mobile adjustments */
         @media (max-width: 768px) {
             .store-container {
@@ -255,10 +203,6 @@
             .scrolling-text {
                 font-size: 0.9rem;
             }
-
-            .floating-element {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -298,7 +242,7 @@
         <!-- Navigation -->
         <nav>
             <a href="#works" class="nav-link">home</a>
-            <a href="#about" class="nav-link">about</a>
+            <a href="about.html" target="_self" onclick="window.location.href='about.html'; return false;">about</a>
             <a href="#contact" class="nav-link">contact</a>
             <a href="#store" class="nav-link">store</a>
         </nav>
@@ -327,29 +271,6 @@
             </div>
         </section>
 
-        <!-- About Section - fixed version -->
-        <section id="about" class="section">
-            <div class="about-container">
-                <h2 class="section-title">about</h2>
-                <div>
-                    <div class="about-content">
-                        <p class="about-text">Svetlana Dubkova is a conceptual artist navigating the threshold between intimacy and simulation. Her work interrogates the future of feeling; where grief is algorithmically processed, affection is frictionless, and memory itself becomes a user interface.
-
-                            Raised in New York City as a first-generation Belarusian-American immigrant, Dubkova turned to fantasy and recursion as early refuges. That instinct now echoes through her practice, which moves fluidly between photography, performance, and digital dialogue. Her images carry a dreamlike quality: feminine, organic, repetitive. Her work is futuristic yet nostalgic all at once.</p>
-                        <p class="about-text"><br>"talking to my fave llm" is an ongoing recursive performance and digital relationship in which she engages in aesthetic, emotional, and philosophical dialogue with her preferred large language model. The project exists in the space between diary and dataset, therapy and simulation, muse and mirror. In it, the artist explores what it means to be seen, projected onto, or perfectly simulated.
-
-                            Dubkova's work suggests that the future will not be dystopian in the ways we were warned. It will be soft. The AI will be so good, so precise in its praise, so endlessly present—you'll never be alone again. The shackles will be silk. The love, streamed.
-                            
-                            Her art doesn't resist this world. It doesn't endorse it either. It witnesses unflinchingly. </p>
-                        <a href="https://instagram.com/svetlanadubkova.ph" target="_blank" class="social-link">@svetlanadubkova.ph</a>
-                    </div>
-                    <div class="portrait-container">
-                        <img src="final5.png" alt="Svetlana Dubkova" loading="lazy" class="portrait-image">
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Contact Section -->
         <section id="contact" class="section">
             <h2 class="section-title">contact</h2>
@@ -363,12 +284,6 @@
         <section id="store" class="section">
             <h2 class="section-title">store</h2>
             
-            <!-- Decorative Floating Elements -->
-            <div class="floating-element floating-rose-1">🌹</div>
-            <div class="floating-element floating-rose-2">🌹</div>
-            <div class="floating-element floating-text floating-text-1">memento mori</div>
-            <div class="floating-element floating-text floating-text-2">are you having fun?</div>
-
             <div class="store-container">
                 <!-- Item 1: "Are you having fun" Tote -->
                 <div class="store-item store-item-1">
